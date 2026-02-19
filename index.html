@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SA Tech Jobs</title>
+  <meta name="description" content="Find junior to senior frontend developer jobs across Johannesburg, Cape Town, Pretoria and remote." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Our stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+
+  <!-- ========================
+    HEADER
+  ========================= -->
+  <header>
+    <div class="logo">SA<span>Tech</span>Jobs</div>
+    <div class="header-right">
+      <span class="live-dot"></span>
+      Updated daily &middot; South Africa
+    </div>
+  </header>
+
+
+  <!-- ========================
+    HERO
+  ========================= -->
+  <section class="hero">
+    <div class="hero-inner">
+
+      <div class="hero-tag">&#127462;&#127487; South Africa's Frontend Job Board</div>
+
+      <h1 class="hero-title">
+        Find Your <span class="highlight">Frontend</span><br />
+        Role in SA
+      </h1>
+
+      <p class="hero-subtitle">
+        Junior to senior frontend positions across Johannesburg,
+        Cape Town, Pretoria and remote. Updated daily.
+      </p>
+
+      <div class="search-wrap">
+        <input
+          class="search-input"
+          type="text"
+          id="searchInput"
+          placeholder="Search by job title, company or skill..."
+        />
+        <button class="search-btn" onclick="applyFilters()">Search</button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================
+    STATS ROW
+  ========================= -->
+  <div class="stats-row">
+    <div class="stat-item">
+      <span class="stat-number" id="totalCount">0</span>
+      <span class="stat-label">Open Roles</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" id="remoteCount">0</span>
+      <span class="stat-label">Remote Friendly</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" id="juniorCount">0</span>
+      <span class="stat-label">Junior Roles</span>
+    </div>
+  </div>
+
+
+  <!-- ========================
+    MAIN — sidebar + job list
+  ========================= -->
+  <div class="main-layout">
+
+
+    <!-- LEFT SIDEBAR — filters -->
+    <aside class="sidebar">
+
+      <!-- City filter -->
+      <div class="filter-section">
+        <div class="filter-heading">Location</div>
+
+        <label class="filter-option">
+          <input type="checkbox" value="Johannesburg" onchange="applyFilters()" />
+          <span class="filter-label">Johannesburg</span>
+          <span class="filter-count">4</span>
+        </label>
+
+        <label class="filter-option">
+          <input type="checkbox" value="Cape Town" onchange="applyFilters()" />
+          <span class="filter-label">Cape Town</span>
+          <span class="filter-count">3</span>
+        </label>
+
+        <label class="filter-option">
+          <input type="checkbox" value="Pretoria" onchange="applyFilters()" />
+          <span class="filter-label">Pretoria</span>
+          <span class="filter-count">2</span>
+        </label>
+
+        <label class="filter-option">
+          <input type="checkbox" value="Durban" onchange="applyFilters()" />
+          <span class="filter-label">Durban</span>
+          <span class="filter-count">1</span>
+        </label>
+      </div>
+
+      <!-- Work type filter -->
+      <div class="filter-section">
+        <div class="filter-heading">Work Type</div>
+
+        <label class="filter-option">
+          <input type="checkbox" value="Remote" onchange="applyFilters()" />
+          <span class="filter-label">Remote</span>
+          <span class="filter-count">4</span>
+        </label>
+
+        <label class="filter-option">
+          <input type="checkbox" value="Hybrid" onchange="applyFilters()" />
+          <span class="filter-label">Hybrid</span>
+          <span class="filter-count">5</span>
+        </label>
+
+        <label class="filter-option">
+          <input type="checkbox" value="On-site" onchange="applyFilters()" />
+          <span class="filter-label">On-site</span>
+          <span class="filter-count">3</span>
+        </label>
+      </div>
+
+      <!-- Level filter -->
+      <div class="filter-section">
+        <div class="filter-heading">Experience Level</div>
+
+        <label class="filter-option">
+          <input type="checkbox" value="Junior" onchange="applyFilters()" />
+          <span class="filter-label">Junior (0–2 yrs)</span>
+          <span class="filter-count">5</span>
+        </label>
+
+        <label class="filter-option">
+          <input type="checkbox" value="Mid" onchange="applyFilters()" />
+          <span class="filter-label">Mid (2–5 yrs)</span>
+          <span class="filter-count">4</span>
+        </label>
+
+        <label class="filter-option">
+          <input type="checkbox" value="Senior" onchange="applyFilters()" />
+          <span class="filter-label">Senior (5+ yrs)</span>
+          <span class="filter-count">3</span>
+        </label>
+      </div>
+
+      <button class="clear-btn" onclick="clearFilters()">Clear All Filters</button>
+
+    </aside>
+
+
+    <!-- RIGHT SIDE — job listings -->
+    <div class="jobs-area">
+
+      <div class="jobs-toolbar">
+        <p class="jobs-count">
+          Showing <strong id="shownCount">0</strong> of <strong id="totalShown">0</strong> jobs
+        </p>
+        <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+          <option value="featured">Featured first</option>
+          <option value="newest">Newest first</option>
+          <option value="salary">Highest salary</option>
+        </select>
+      </div>
+
+      <!-- Job cards are inserted here by jobs.js -->
+      <div class="job-list" id="jobList"></div>
+
+      <!-- Shows when no jobs match the search/filters -->
+      <div class="no-results" id="noResults">
+        <span class="no-results-emoji">&#128269;</span>
+        <p>No jobs match your search.<br />Try clearing your filters or using different keywords.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================
+    FOOTER
+  ========================= -->
+  <footer>
+    Built by <span>Thabo Mapedi</span> &middot; SA Tech Jobs &middot; 2026
+  </footer>
+
+
+  <!-- Our JavaScript — loaded at the bottom so the HTML is ready first -->
+  <script src="script.js"></script>
+
+</body>
+</html>
